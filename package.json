@@ -1,0 +1,17 @@
+{
+  "name": "06_intro_nodejs",
+  "version": "1.0.0",
+  "description": "Petit test Node avec les DIM",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "LD",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "express": "^4.17.1",
+    "mongodb": "^3.5.8",
+    "nodemon": "^2.0.4"
+  }
+}
