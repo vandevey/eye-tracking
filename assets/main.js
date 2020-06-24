@@ -186,7 +186,7 @@ function screen(index) {
   setTimeout(() => {
     console.log('fin capture' + index);
 
-    var json = JSON.stringify(points);
+    var json = '{ "Table'+ index + '" : ' + JSON.stringify(points)+ '}';
     // postAjax(json);
 
     console.log('jsons : ' + json);

@@ -4,7 +4,8 @@ const express = require("express")
 const fs = require('fs');
 const app = express()
 app.use(express.json())
-var array = []
+var array = [];
+var index = 1;
 
 app.use("/dist",express.static(__dirname + "/dist"))
 app.use("/css",express.static(__dirname + "/css"))
@@ -20,11 +21,14 @@ app.get("/adds", function(req, res) {
 
 app.get("/results", function(req, res) {
 
-	fs.readFile('pointRecording.json', function(erreur, fichier) {
-		var recordings
-		recordings = JSON.parse(fichier)
-		console.log("nb objet: " + recordings);
-	})
+	// fs.readFile('pointRecording.json', function(erreur, fichier) {
+	// 	var recordings
+	// 	recordings = JSON.parse(fichier)
+	// 	let obj = JSON.stringify(recordings)
+	// 	console.log();
+		
+	// 	console.log("Table0: " + recordings['Table0']);
+	// })
 	res.sendFile(__dirname + "/results.html")
 })
 
@@ -33,6 +37,7 @@ app.post('/data', function(req, res) {
 		array.push(req.body);
 		fs.writeFile('pointRecording.json', JSON.stringify(array), (err) => {
 			if (err) throw err;
+			index ++;
 			console.log('Data written to file');
 		});
 });
