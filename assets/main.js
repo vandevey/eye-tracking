@@ -174,42 +174,34 @@ function screen(index) {
   if (index < 1) {
     $('.calibrationDiv').addClass('close');
   }
+  if (index < images.length) {
+   
+    $('#image-' + index).addClass('visible');
 
-  $('#image-' + index).addClass('visible');
+    setTimeout(() => {
+      console.log('start');
+      captureTrue = true;
+      $('.ProgressBar').addClass('active');
+    }, 1000);
 
-  setTimeout(() => {
-    console.log('start');
-    captureTrue = true;
-    $('.ProgressBar').addClass('active');
-  }, 1000);
+    setTimeout(() => {
+      console.log('fin capture' + index);
 
-  setTimeout(() => {
-    console.log('fin capture' + index);
+      var json = '{ "Table' + index + '" : ' + JSON.stringify(points) + '}';
+      postAjax(json);
 
-    var json = '{ "Table'+ index + '" : ' + JSON.stringify(points)+ '}';
-    // postAjax(json);
+      captureTrue = false;
+      points = [];
+      $('#image-' + index).removeClass('visible');
+      index++;
+      screen(index) //again
+    }, 11000);
+  } else {
+    console.log('redirect');
+    document.location.href = "http://localhost:1337/results";
 
-    console.log('jsons : ' + json);
-    
-    if(index<= 3){
-      $.ajax({
-        url: "/data", 
-        type: "POST",
-        data: json,
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        success: function (data) {
-          console.log("data: " + data);
-        }
-      })
-    }
 
-    captureTrue = false;
-    points = [];
-    $('#image-' + index).removeClass('visible');
-    index++;
-    screen(index) //again
-  }, 11000);
+  }
 }
 
 $(document).ready(function () {
@@ -219,7 +211,14 @@ $(document).ready(function () {
 })
 
 function postAjax(json) {
-  console.log("points: " + json)
-
-
+  $.ajax({
+    url: "/data",
+    type: "POST",
+    data: json,
+    dataType: "json",
+    contentType: "application/json; charset=utf-8",
+    success: function (data) {
+      console.log("data: " + data);
+    }
+  })
 }
