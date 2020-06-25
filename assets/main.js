@@ -167,7 +167,6 @@ calibrationDots.on('click', function () {
   }
 })
 
-
 function screen(index) {
   // code
   console.log(index);
@@ -199,8 +198,6 @@ function screen(index) {
   } else {
     console.log('redirect');
     document.location.href = "http://localhost:1337/results";
-
-
   }
 }
 
