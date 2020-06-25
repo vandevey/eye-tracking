@@ -1,5 +1,6 @@
 const express = require("express")
 const fs = require('fs');
+
 const app = express()
 app.use(express.json())
 var array = [];
@@ -28,7 +29,19 @@ app.get("/results", function (req, res) {
 		console.log("recording: " + recordings);
 		console.log("table0: " + recordings.table0);
 	})
-	res.sendFile(__dirname + "/results.html")
+	res.sendFile(__dirname + "/results.html") 
+})
+
+app.get('/json', function(req, res) {
+	
+	fs.readFile('pointRecording.json', function (erreur, fichier) {
+		var recordings;
+		recordings = JSON.parse(fichier);
+		console.log("recording: " + recordings);
+		console.log("table0: " + recordings.table0);
+
+		return recordings
+	})
 })
 
 //Recording Json file for heatmap

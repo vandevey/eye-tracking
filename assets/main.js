@@ -173,16 +173,16 @@ function screen(index) {
   if (index < 1) {
     $('.calibrationDiv').addClass('close');
   }
+
+
+  $('#image-' + index).addClass('visible');
+
+  setTimeout(() => {
+    console.log('start');
+    captureTrue = true;
+    $('.ProgressBar').addClass('active');
+  }, 1000);
   if (index < images.length) {
-   
-    $('#image-' + index).addClass('visible');
-
-    setTimeout(() => {
-      console.log('start');
-      captureTrue = true;
-      $('.ProgressBar').addClass('active');
-    }, 1000);
-
     setTimeout(() => {
       console.log('fin capture' + index);
 
