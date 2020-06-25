@@ -46,28 +46,28 @@
     <div class="swiper-container">
         <div class="swiper-wrapper">
             <div class="swiper-slide">
-                <picture class="swiper-pic">
+                <picture class="swiper-pic" id="heatmap0">
                     <img class="swiper-img"
                         src="https://images.unsplash.com/photo-1592727995117-4cdc7ee6fcb4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
                         alt="">
                 </picture>
             </div>
             <div class="swiper-slide">
-                <picture class="swiper-pic">
+                <picture class="swiper-pic" id="heatmap1">
                     <img class="swiper-img"
                         src="//images.unsplash.com/photo-1592799874167-413e2013445e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
                         alt="">
                 </picture>
             </div>
             <div class="swiper-slide">
-                <picture class="swiper-pic">
+                <picture class="swiper-pic" id="heatmap2">
                     <img class="swiper-img"
                         src="//images.unsplash.com/photo-1592762331869-d7c8eaa63f58?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
                         alt="">
                 </picture>
             </div>
             <div class="swiper-slide">
-                <picture class="swiper-pic">
+                <picture class="swiper-pic" id="heatmap3">
                     <img class="swiper-img"
                         src="//images.unsplash.com/photo-1592761945110-33520eabf327?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
                         alt="">
@@ -82,10 +82,15 @@
         <!-- Add Arrows -->
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
+
+
     </div>
     
     <!-- Swiper JS -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/js/swiper.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="dist/heatmap.min.js"></script>
     <!-- Jquery -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
@@ -93,6 +98,14 @@
 
     <!-- Initialize Swiper -->
     <script>
+        var results = 0;
+
+        $.getJSON('/json.json', function (data) {
+            results = data;
+            console.log(results);
+        });
+
+        $("body").get(0).style.setProperty("--swiper-theme-color", "orange");
         var swiper = new Swiper('.swiper-container', {
             pagination: {
                 el: '.swiper-pagination',
@@ -126,6 +139,32 @@
             console.log(pointsArray[0]);
         }, 2000);
 
+
+        let points = [{ "x": 487.55555555555554, "y": 694, "value": 100, "radius": 100 }, { "x": 470.6666666666667, "y": 677.8888888888889, "value": 100, "radius": 100 }, { "x": 439, "y": 661.1111111111111, "value": 100, "radius": 100 }, { "x": 404.8888888888889, "y": 649.3333333333334, "value": 100, "radius": 100 }, { "x": 344.55555555555554, "y": 629.3333333333334, "value": 100, "radius": 100 }, { "x": 317.44444444444446, "y": 622.1111111111111, "value": 100, "radius": 100 }, { "x": 307, "y": 618.5555555555555, "value": 100, "radius": 100 }, { "x": 275.8888888888889, "y": 607.6666666666666, "value": 100, "radius": 100 }, { "x": 221.77777777777777, "y": 573.1111111111111, "value": 100, "radius": 100 }, { "x": 213.66666666666666, "y": 567.5555555555555, "value": 100, "radius": 100 }, { "x": 161.44444444444446, "y": 545.6666666666666, "value": 100, "radius": 100 }, { "x": 126.77777777777777, "y": 534, "value": 100, "radius": 100 }]
+
+        $('.swiper-pic').on('click', function (e) {
+
+            id = $(this).attr('id');
+            console.log(id);
+            // minimal heatmap instance configuration
+            var heatmapInstance = h337.create({
+                // only container is required, the rest will be defaults
+                container: document.querySelector('#' + id)
+            });
+
+            // heatmap data format
+            var data = {
+                data: points
+            };
+
+            // if you have a set of datapoints always use setData instead of addData
+            // for data initialization
+            heatmapInstance.setData(data);
+
+            setTimeout(() => {
+                $('.heatmap-canvas').remove();
+            }, 1000);
+        })
     </script>
 </body>
 

@@ -1,10 +1,8 @@
 const express = require("express");
 const fs = require('fs');
-const app = express();
-var swig = require('swig');
-const { RSA_NO_PADDING } = require("constants");
-app.use(express.json());
 
+const app = express()
+app.use(express.json())
 var array = [];
 var index = 1;
 
@@ -38,7 +36,26 @@ swig.setDefaults({ cache: false });
 // Don't leave both of these to `false` in production!
 
 app.get("/results", function (req, res) {
+
+	fs.readFile('pointRecording.json', function (erreur, fichier) {
+		var recordings;
+		recordings = JSON.parse(fichier);
+		console.log("recording: " + recordings);
+		console.log("table0: " + recordings.table0);
+	})
 	res.sendFile(__dirname + "/results.html")
+})
+
+app.get('/json', function(req, res) {
+	
+	fs.readFile('pointRecording.json', function (erreur, fichier) {
+		var recordings;
+		recordings = JSON.parse(fichier);
+		console.log("recording: " + recordings);
+		console.log("table0: " + recordings.table0);
+
+		return recordings
+	})
 })
 
 //Recording Json file for heatmap
