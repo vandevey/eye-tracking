@@ -25,8 +25,8 @@ app.get("/results", function (req, res) {
 	fs.readFile('pointRecording.json', function (erreur, fichier) {
 		var recordings;
 		recordings = JSON.parse(fichier);
-		console.log("recording: " + recordings);
-		console.log("table0: " + recordings.table0);
+		//Table 0 , 1, 2, 3
+		console.log(recordings[0]);
 	})
 	res.sendFile(__dirname + "/results.html")
 })
@@ -45,5 +45,9 @@ app.post('/deleteData', function (req, res) {
 	console.log('Delete Data');
 	fs.unlinkSync('pointRecording.json');
 });
+
+app.get('/readData', function (req, res) {
+    res.sendFile(__dirname + "/pointRecording.json")
+})
 
 app.listen(1337)
