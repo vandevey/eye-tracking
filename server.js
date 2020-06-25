@@ -21,14 +21,12 @@ app.get("/adds", function(req, res) {
 
 app.get("/results", function(req, res) {
 
-	// fs.readFile('pointRecording.json', function(erreur, fichier) {
-	// 	var recordings
-	// 	recordings = JSON.parse(fichier)
-	// 	let obj = JSON.stringify(recordings)
-	// 	console.log();
-		
-	// 	console.log("Table0: " + recordings['Table0']);
-	// })
+	fs.readFile('pointRecording.json', function(erreur, fichier) {
+		var recordings;
+		recordings = JSON.parse(fichier);
+		console.log("recording: " + recordings);
+		console.log("table0: " + recordings.table0);
+	})
 	res.sendFile(__dirname + "/results.html")
 })
 
