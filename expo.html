@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Eye tracking</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<script type="text/javascript">
+
+var counter = 0;
+var myInterval = null;
+$(document).ready(function(){
+  $(".target").hover(function (e) {
+    myInterval = setInterval(function () {
+      var data = $(e.target).data('type')
+      var target = $("span.number." + data)
+      target.text((parseInt(target.text()) + 1));
+    }, 1);
+  }, function (e) {
+    clearInterval(myInterval);
+  });
+
+  setInterval(function () {
+    var max = 0;
+    var project = "";
+    $.each($("span.number"), function (key, value) {
+      console.info(value)
+      console.log(parseInt(value.textContent))
+      console.log(value.dataset.project)
+      if (parseInt(value.textContent) > max) {
+        max = parseInt(value.textContent)
+        project = value.dataset.project
+      }
+    })
+    // document.location.href = "./results.php?ProjetName=" + project + "&Time=" + max;
+  }, 10000)
+});
+
+</script>
+<!-- Page Content -->
+
+<h1>Voici les oeuvres que vous avez consulté : </h1>
+<div class="container">
+  <div class="">
+    <div class="position-fixed w-25 m-5" style="top:0px; right: 0px;">
+      <div class="card h-100">
+        <a href="#"><img class="card-img-top" src="assets/medias/Research.jpg" alt="ADN"></a>
+        <div class="card-body">
+          <h4 class="card-title">
+            <a href="#">Research</a>
+          </h4>
+          <p class="counter">counter : <span class="font-weight-bold number res" data-project="Research">0</span> ms</p>
+        </div>
+      </div>
+    </div>
+    <div class="position-fixed w-25 m-5 target" data-type="res" style="top:0px; right: 0px; height: 30%;">
+      <!-- hidden détection -->
+    </div>
+    <div class="w-25 position-fixed m-5" style="top:0px; left: 0px;">
+      <div class="card h-100">
+        <a href="#"><img class="card-img-top" src="assets/medias/Technology.jpg" alt=""></a>
+        <div class="card-body">
+          <h4 class="card-title">
+            <a href="#">Technology</a>
+          </h4>
+          <p class="counter">counter : <span class="font-weight-bold number tec" data-project="Technology">0</span> ms
+          </p>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="position-fixed w-25 m-5 target" data-type="tec" style="top:0px; left: 0px; height: 30%;">
+      <!-- hidden détection -->
+    </div>
+    <div class=" w-25 position-fixed m-5" style="bottom: 0px; right: 0px;">
+      <div class="card h-100">
+        <a href="#"><img class="card-img-top" src="assets/medias/Astronomy.jpg" alt=""></a>
+        <div class="card-body">
+          <h4 class="card-title">
+            <a href="#">Astronomy</a>
+          </h4>
+          <p class="counter">counter : <span class="font-weight-bold number ori" data-project="Astronomy">0</span> ms
+          </p>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="position-fixed target w-25 m-5" data-type="ori" style="bottom: 0px; right: 0px; height: 30%;">
+      <!-- hidden détection -->
+    </div>
+    <div class="w-25 position-fixed m-5" style="bottom:0px; left: 0px;">
+      <div class="card h-100">
+        <a href="#"><img class="card-img-top" src="assets/medias/Health.jpg" alt=""></a>
+        <div class="card-body">
+          <h4 class="card-title">
+            <a href="#">Health</a>
+          </h4>
+          <p class="counter">counter : <span class="font-weight-bold number blo" data-project="Health">0</span> ms</p>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="position-fixed w-25 target m-5" data-type="blo" style="bottom:0px; left: 0px; height: 30%;">
+      <!-- hidden détection -->
+    </div>
+  </div>
+  <!-- /.row -->
+</div>
+</body>
+</html>
