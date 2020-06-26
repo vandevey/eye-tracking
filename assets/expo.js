@@ -1,7 +1,10 @@
 var points = [];
 var captureTrue = false;
 
-var counter = 0;
+var counterResearch = 0;
+var counterTechnology = 0;
+var counterAstronomy = 0;
+var counterHealth = 0;
 var myInterval = null;
 
 const collisionSVG = "collisionSVG";
@@ -124,12 +127,43 @@ var collisionEyeListener = function (data, clock) {
     }
 
     averagePoint = pointsAverage(data.x, data.y);
-    // averagePoint.x,
-    // averagePoint.y,
 
-    if ((averagePoint.x < midWidth) && (averagePoint.y < midHeight)) {
-        console.log('hop');
-        lookAt(counter, myInterval, 1)
+    var max = 0;
+    var project = "";
+
+    if (counterResearch == 200 || counterTechnology == 200 || counterHealth == 200 || counterAstronomy == 200) {
+      if (counterHealth == 200) {
+        max = counterHealth;
+        project = "Health";
+      } else if (counterResearch  == 200) {
+        max = counterResearch;
+        project = "Research";
+      } else if (counterAstronomy  == 200) {
+        max = counterAstronomy;
+        project = "Astronomy";
+      } else if (counterTechnology  == 200) {
+        max = counterTechnology;
+        project = "Technology";
+      }
+
+      var results = document.getElementById('results');
+      var recap = document.getElementById('recap');
+
+      recap.style.visibility = 'hidden';
+      results.style.visibility = 'visible';
+
+      document.getElementById('title').textContent = project;
+      document.getElementById("imgRes").src = "assets/medias/" + project + ".jpg";
+    } else {
+      if ((averagePoint.x < midWidth) && (averagePoint.y < midHeight)) {
+        counterTechnology = lookAt(counterTechnology, 2)
+      } else if ((averagePoint.x < midWidth) && (averagePoint.y > midHeight)) {
+        counterHealth = lookAt(counterHealth, 4)
+      } else if ((averagePoint.x > midWidth) && (averagePoint.y < midHeight)) {
+        counterResearch = lookAt(counterResearch, 1)
+      } else if ((averagePoint.x > midWidth) && (averagePoint.y > midHeight)) {
+        counterAstronomy = lookAt(counterAstronomy, 3)
+      }
     }
 
     var dot2 = d3.select("#averageCircle")
@@ -175,35 +209,13 @@ function calibration(calibrationDots) {
     })
 }
 
-function lookAt(counter, myInterval, id) {
-    console.log([counter, myInterval, id]);
+function lookAt(counter, id) {
 
     let target = $('#tile'+id);
 
-    let number = target.find('.res'); 
+    let number = target.find('.res');
 
-    // TODO number ++
-    
-    // $(".target").hover(function (e) {
-    //     myInterval = setInterval(function () {
-    //         var data = $(e.target).data('type')
-    //         var target = $("span.number." + data)
-    //         target.text((parseInt(target.text()) + 1));
-    //     }, 1);
-    // })
+    counter = counter + 1;
 
-    // setInterval(function () {
-    //     var max = 0;
-    //     var project = "";
-    //     $.each($("span.number"), function (key, value) {
-    //         console.info(value)
-    //         console.log(parseInt(value.textContent))
-    //         console.log(value.dataset.project)
-    //         if (parseInt(value.textContent) > max) {
-    //             max = parseInt(value.textContent)
-    //             project = value.dataset.project
-    //         }
-    //     })
-    //     // document.location.href = "./results.php?ProjetName=" + project + "&Time=" + max;
-    // }, 10000)
+    return counter;
 }
