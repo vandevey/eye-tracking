@@ -173,15 +173,19 @@ function screen(index) {
   if (index < 1) {
     $('.calibrationDiv').addClass('close');
   }
-
+  console.log('remove');
 
   $('#image-' + index).addClass('visible');
 
   setTimeout(() => {
+    
+  
+  $('.TransitionPanel').removeClass('visible');
     console.log('start');
     captureTrue = true;
     $('.ProgressBar').addClass('active');
   }, 1000);
+  
   if (index < images.length) {
     setTimeout(() => {
       console.log('fin capture' + index);
@@ -192,6 +196,10 @@ function screen(index) {
       captureTrue = false;
       points = [];
       $('#image-' + index).removeClass('visible');
+      $('.ProgressBar').removeClass('active');
+      console.log('visible');
+      
+      $('.TransitionPanel').addClass('visible');
       index++;
       screen(index) //again
     }, 11000);
