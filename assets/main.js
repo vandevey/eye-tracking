@@ -15,6 +15,8 @@ var arrayX = new Array();
 var arrayY = new Array();
 
 window.onload = function () {
+  //delete JSONFile
+  deleteJson()
 
   var localstorageLabel = 'webgazerGlobalData';
   window.localStorage.setItem(localstorageLabel, null);
@@ -225,5 +227,12 @@ function postAjax(json) {
     success: function (data) {
       console.log("data: " + data);
     }
+  })
+}
+
+function deleteJson(){
+  $.ajax({
+    url: "/deleteData",
+    type: "POST",
   })
 }
