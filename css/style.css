@@ -136,6 +136,8 @@ picture .image.visible {
   content: "Regardez et cliquez sur chaque point pour calibrer votre regard";
   position: absolute;
   padding: 0 0 150px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   top: 0;
   left: 0;
   -webkit-transition: -webkit-transform 1s ease;

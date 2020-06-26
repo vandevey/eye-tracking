@@ -124,12 +124,13 @@ picture {
     &::after {
         content: "Regardez et cliquez sur chaque point pour calibrer votre regard";
         position: absolute;
-        padding: 0 0 150px;
+        padding: 0 0 150px; 
+        box-sizing: border-box;
         top: 0;
         left: 0;
         transition: transform 1s ease;
         width: 100%;
-        height: 100%;
+        height: 100%; 
         background-color: white;
         display: flex;
         justify-content: center;

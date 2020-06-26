@@ -1,12 +1,12 @@
 {
-  "name": "06_intro_nodejs",
+  "name": "eye_tracking",
   "version": "1.0.0",
-  "description": "Petit test Node avec les DIM",
+  "description": "Experience eye tracking",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "LD",
+  "author": "Digital Imersive Museum",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.2",
