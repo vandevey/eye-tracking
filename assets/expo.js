@@ -1,5 +1,5 @@
 var points = [];
-var captureTrue = false;
+var record = false;
 
 var counterResearch = 0;
 var counterTechnology = 0;
@@ -16,8 +16,8 @@ var arrayY = new Array();
 var width = window.innerWidth;
 var height = window.innerHeight;
 
-let midHeight = width / 2
-let midWidth = height / 2
+let midHeight = height / 2
+let midWidth = width / 2
 
 window.onload = function () {
 
@@ -131,39 +131,43 @@ var collisionEyeListener = function (data, clock) {
     var max = 0;
     var project = "";
 
-    if (counterResearch == 200 || counterTechnology == 200 || counterHealth == 200 || counterAstronomy == 200) {
-      if (counterHealth == 200) {
-        max = counterHealth;
-        project = "Health";
-      } else if (counterResearch  == 200) {
-        max = counterResearch;
-        project = "Research";
-      } else if (counterAstronomy  == 200) {
-        max = counterAstronomy;
-        project = "Astronomy";
-      } else if (counterTechnology  == 200) {
-        max = counterTechnology;
-        project = "Technology";
-      }
+    if (record) {
+        if (counterResearch == 200 || counterTechnology == 200 || counterHealth == 200 || counterAstronomy == 200) {
+            if (counterHealth == 200) {
+                max = counterHealth;
+                project = "Health";
+            } else if (counterResearch == 200) {
+                max = counterResearch;
+                project = "Research";
+            } else if (counterAstronomy == 200) {
+                max = counterAstronomy;
+                project = "Astronomy";
+            } else if (counterTechnology == 200) {
+                max = counterTechnology;
+                project = "Technology";
+            }
 
-      var results = document.getElementById('results');
-      var recap = document.getElementById('recap');
+            var results = document.getElementById('results');
+            var recap = document.getElementById('recap');
 
-      recap.style.visibility = 'hidden';
-      results.style.visibility = 'visible';
+            recap.style.visibility = 'hidden';
+            results.style.visibility = 'visible';
 
-      document.getElementById('title').textContent = project;
-      document.getElementById("imgRes").src = "assets/medias/" + project + ".jpg";
-    } else {
-      if ((averagePoint.x < midWidth) && (averagePoint.y < midHeight)) {
-        counterTechnology = lookAt(counterTechnology, 2)
-      } else if ((averagePoint.x < midWidth) && (averagePoint.y > midHeight)) {
-        counterHealth = lookAt(counterHealth, 4)
-      } else if ((averagePoint.x > midWidth) && (averagePoint.y < midHeight)) {
-        counterResearch = lookAt(counterResearch, 1)
-      } else if ((averagePoint.x > midWidth) && (averagePoint.y > midHeight)) {
-        counterAstronomy = lookAt(counterAstronomy, 3)
-      }
+            record = false;
+
+            document.getElementById('title').textContent = project;
+            document.getElementById("imgRes").src = "assets/medias/" + project + ".jpg";
+        } else {
+            if ((averagePoint.x < midWidth) && (averagePoint.y < midHeight)) {
+                counterTechnology = lookAt(counterTechnology, 2)
+            } else if ((averagePoint.x < midWidth) && (averagePoint.y > midHeight)) {
+                counterHealth = lookAt(counterHealth, 4)
+            } else if ((averagePoint.x > midWidth) && (averagePoint.y < midHeight)) {
+                counterResearch = lookAt(counterResearch, 1)
+            } else if ((averagePoint.x > midWidth) && (averagePoint.y > midHeight)) {
+                counterAstronomy = lookAt(counterAstronomy, 3)
+            }
+        }
     }
 
     var dot2 = d3.select("#averageCircle")
@@ -204,14 +208,14 @@ function calibration(calibrationDots) {
         if (clickCount == 9) {
 
             $('.calibrationDiv').addClass('close');
-
+            record = true;
         }
     })
 }
 
 function lookAt(counter, id) {
 
-    let target = $('#tile'+id);
+    let target = $('#tile' + id);
 
     let number = target.find('.res');
 
