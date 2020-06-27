@@ -204,7 +204,7 @@ function screen(index) {
       $('.TransitionPanel').addClass('visible');
       index++;
       screen(index) //again
-    }, 11000);
+    }, 9000);
   } else {
     console.log('redirect');
     document.location.href = "http://localhost:1337/results";
