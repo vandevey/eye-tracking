@@ -302,3 +302,8 @@ picture .image.visible {
   text-decoration: none;
 }
 /*# sourceMappingURL=style.css.map */
+
+#results {
+  visibility: hidden;
+  transform: translate(-50%, -50%);
+}
