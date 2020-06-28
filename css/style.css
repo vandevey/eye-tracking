@@ -312,5 +312,5 @@ picture .image.visible {
 
 #results {
   visibility: hidden;
-  transform: translate(-50%, -50%);
+  transform: translate(-30%, -30%);
 }
