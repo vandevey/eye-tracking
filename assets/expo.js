@@ -49,10 +49,7 @@ window.onload = function () {
     setTimeout(checkIfReady, 100);
 };
 
-
-
 function setupCollisionSystem() {
-
 
     var numberOfNodes = 200;
 
@@ -77,21 +74,21 @@ function setupCollisionSystem() {
         .style("position", "absolute")
         .style("z-index", 110);
 
-    svg.append("line")
-        .attr("id", "eyeline1")
-        .attr("stroke-width", 2)
-        .attr("stroke", "green");
+    // svg.append("line")
+    //     .attr("id", "eyeline1")
+    //     .attr("stroke-width", 2)
+    //     .attr("stroke", "green");
 
-    svg.append("line")
-        .attr("id", "eyeline2")
-        .attr("stroke-width", 2)
-        .attr("stroke", "green");
+    // svg.append("line")
+    //     .attr("id", "eyeline2")
+    //     .attr("stroke-width", 2)
+    //     .attr("stroke", "green");
 
-    svg.append("rect")
-        .attr("id", "averageCircle")
-        .attr("width", 10)
-        .attr("height", 10)
-        .attr("fill", "green");
+    // svg.append("rect")
+    //     .attr("id", "averageCircle")
+    //     .attr("width", 10)
+    //     .attr("height", 10)
+    //     .attr("fill", "green");
 }
 
 var collisionEyeListener = function (data, clock) {
@@ -147,11 +144,8 @@ var collisionEyeListener = function (data, clock) {
                 project = "Technology";
             }
 
-            var results = document.getElementById('results');
-            var recap = document.getElementById('recap');
-
-            recap.style.visibility = 'hidden';
-            results.style.visibility = 'visible';
+            $('#results').addClass('visible');
+ 
 
             record = false;
 
@@ -170,21 +164,21 @@ var collisionEyeListener = function (data, clock) {
         }
     }
 
-    var dot2 = d3.select("#averageCircle")
-        .attr("x", averagePoint.x)
-        .attr("y", averagePoint.y)
+    // var dot2 = d3.select("#averageCircle")
+    //     .attr("x", averagePoint.x)
+    //     .attr("y", averagePoint.y)
 
-    var line = d3.select('#eyeline1')
-        .attr("x1", averagePoint.x)
-        .attr("y1", averagePoint.y)
-        .attr("x2", cl.getCurrentPosition()[27][0] * whr[0])
-        .attr("y2", cl.getCurrentPosition()[27][1] * whr[1]);
+    // var line = d3.select('#eyeline1')
+    //     .attr("x1", averagePoint.x)
+    //     .attr("y1", averagePoint.y)
+    //     .attr("x2", cl.getCurrentPosition()[27][0] * whr[0])
+    //     .attr("y2", cl.getCurrentPosition()[27][1] * whr[1]);
 
-    var line = d3.select("#eyeline2")
-        .attr("x1", averagePoint.x)
-        .attr("y1", averagePoint.y)
-        .attr("x2", cl.getCurrentPosition()[32][0] * whr[0])
-        .attr("y2", cl.getCurrentPosition()[32][1] * whr[1]);
+    // var line = d3.select("#eyeline2")
+    //     .attr("x1", averagePoint.x)
+    //     .attr("y1", averagePoint.y)
+    //     .attr("x2", cl.getCurrentPosition()[32][0] * whr[0])
+    //     .attr("y2", cl.getCurrentPosition()[32][1] * whr[1]);
 
     nodes[0].px = averagePoint.x;
     nodes[0].py = averagePoint.y;
@@ -205,10 +199,14 @@ function calibration(calibrationDots) {
     calibrationDots.on('click', function () {
         clickCount++;
         $(this).css('opacity', '0')
-        if (clickCount == 9) {
-
+        if (clickCount >= 9) {
             $('.calibrationDiv').addClass('close');
+            $('.TransitionPanel').removeClass('visible');
             record = true;
+
+            $('#webgazerVideoFeed').remove()
+            $('#webgazerFaceOverlay').remove()
+            $('#webgazerFaceFeedbackBox').remove()
         }
     })
 }
@@ -216,10 +214,9 @@ function calibration(calibrationDots) {
 function lookAt(counter, id) {
 
     let target = $('#tile' + id);
-
     let number = target.find('.res');
-
     counter = counter + 1;
-
     return counter;
 }
+
+
