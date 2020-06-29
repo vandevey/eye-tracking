@@ -74,21 +74,21 @@ function setupCollisionSystem() {
     .style("position", "absolute")
     .style("z-index", 110);
 
-//   svg.append("line")
-//     .attr("id", "eyeline1")
-//     .attr("stroke-width", 2)
-//     .attr("stroke", "green");
+  // svg.append("line")
+  //   .attr("id", "eyeline1")
+  //   .attr("stroke-width", 2)
+  //   .attr("stroke", "green");
 
-//   svg.append("line")
-//     .attr("id", "eyeline2")
-//     .attr("stroke-width", 2)
-//     .attr("stroke", "green");
+  // svg.append("line")
+  //   .attr("id", "eyeline2")
+  //   .attr("stroke-width", 2)
+  //   .attr("stroke", "green");
 
-//   svg.append("rect")
-//     .attr("id", "averageCircle")
-//     .attr("width", 10)
-//     .attr("height", 10)
-//     .attr("fill", "green");
+  // svg.append("rect")
+  //   .attr("id", "averageCircle")
+  //   .attr("width", 10)
+  //   .attr("height", 10)
+  //   .attr("fill", "green");
 }
 
 var collisionEyeListener = function (data, clock) {
@@ -153,8 +153,8 @@ var collisionEyeListener = function (data, clock) {
   //   .attr("x2", cl.getCurrentPosition()[32][0] * whr[0])
   //   .attr("y2", cl.getCurrentPosition()[32][1] * whr[1]);
 
-  // nodes[0].px = averagePoint.x;
-  // nodes[0].py = averagePoint.y;
+  nodes[0].px = averagePoint.x;
+  nodes[0].py = averagePoint.y;
   force.resume();
 }
 
@@ -164,40 +164,39 @@ let clickCount = 0;
 calibrationDots.on('click', function () {
   clickCount++;
   $(this).css('opacity', '0')
-  if ((clickCount >= 9) && doOnce) {
+  if ((clickCount == 9) && doOnce) {
     let index = 0;
+    $('#webgazerVideoFeed').css('opacity', '0');
+    $('#webgazerFaceOverlay').css('opacity', '0');
+    $('#webgazerFaceFeedbackBox').css('opacity', '0');
     doOnce = false;
-
     screen(index);
+    
   }
 })
 
 function screen(index) {
   // code
-  //transition();
-
   console.log(index);
   if (index < 1) {
     $('.calibrationDiv').addClass('close');
-    $('#webgazerVideoFeed').remove()
-    $('#webgazerFaceOverlay').remove()
-    $('#webgazerFaceFeedbackBox').remove()
   }
+  console.log('remove');
+
+  $('#image-' + index).addClass('visible');
 
   setTimeout(() => {
-    $('.TransitionPanel').removeClass('visible');
-    console.log('remove');
-  }, 1000);
-
-  setTimeout(() => {
-    $('#image-' + index).addClass('visible');
+    
+  
+  $('.TransitionPanel').removeClass('visible');
     console.log('start');
     captureTrue = true;
     $('.ProgressBar').addClass('active');
-  }, 2000);
-
+  }, 1000);
+  
   if (index < images.length) {
     setTimeout(() => {
+      console.log('fin capture' + index);
 
       var json = JSON.stringify(points);
       postAjax(json);
@@ -206,10 +205,12 @@ function screen(index) {
       points = [];
       $('#image-' + index).removeClass('visible');
       $('.ProgressBar').removeClass('active');
+      console.log('visible');
+      
       $('.TransitionPanel').addClass('visible');
       index++;
       screen(index) //again
-    }, 10000);
+    }, 9000);
   } else {
     console.log('redirect');
     document.location.href = "http://localhost:1337/results";
@@ -235,18 +236,9 @@ function postAjax(json) {
   })
 }
 
-function deleteJson() {
+function deleteJson(){
   $.ajax({
     url: "/deleteData",
     type: "POST",
   })
-}
-
-
-function transition() {
-
-  $('.TransitionPanel').addClass('visible');
-  setTimeout(() => {
-    $('.TransitionPanel').removeClass('visible');
-  }, 2100);
 }

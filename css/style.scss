@@ -293,11 +293,17 @@ picture {
     height: 100vh;
     background-color: white;
     z-index: 160;
-    transform: translateY(-100%);
+    transform: translateY(-100%); 
     transition: 1s ease;
+
+    &-img {
+        width: 500px;
+        border-radius: 10px;
+    }
 
     .card-body {
         margin: 0 0 0 50px;
+        max-width: 500px;
     }
 
     &.visible {

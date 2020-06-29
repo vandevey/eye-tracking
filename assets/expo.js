@@ -200,13 +200,16 @@ function calibration(calibrationDots) {
         clickCount++;
         $(this).css('opacity', '0')
         if (clickCount >= 9) {
+            $('#webgazerVideoFeed').css('opacity', '0');
+            $('#webgazerFaceOverlay').css('opacity', '0');
+            $('#webgazerFaceFeedbackBox').css('opacity', '0');
             $('.calibrationDiv').addClass('close');
             $('.TransitionPanel').removeClass('visible');
             record = true;
 
-            $('#webgazerVideoFeed').remove()
-            $('#webgazerFaceOverlay').remove()
-            $('#webgazerFaceFeedbackBox').remove()
+            // $('#webgazerVideoFeed').remove()
+            // $('#webgazerFaceOverlay').remove()
+            // $('#webgazerFaceFeedbackBox').remove()
         }
     })
 }

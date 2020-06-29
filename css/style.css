@@ -329,8 +329,14 @@ picture .image.visible {
   transition: 1s ease;
 }
 
+.Results-img {
+  width: 500px;
+  border-radius: 10px;
+}
+
 .Results .card-body {
   margin: 0 0 0 50px;
+  max-width: 500px;
 }
 
 .Results.visible {

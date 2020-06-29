@@ -2,8 +2,10 @@ const express = require("express");
 const fs = require('fs');
 const path = require('path');
 const app = express();
-app.use(express.json());
 var array = [];
+
+app.use(express.json());
+
 var index = 1;
 
 app.use("/dist", express.static(__dirname + "/dist"))
@@ -103,7 +105,11 @@ app.post('/data', function (req, res) {
 });
 
 app.post('/deleteData', function (req, res) {
-	fs.unlinkSync('pointRecording.json');
+	fs.writeFile('pointRecording.json', '', (err) => {
+        if (err) throw err;
+        console.log('Delete Data');
+	});
+	array = [];
 });
 
 app.get('/recordingJson', function (req, res) {
