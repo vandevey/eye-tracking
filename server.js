@@ -72,7 +72,6 @@ app.get("/expoRules", function (req, res) {
 
 app.use('/expoResults', express.static(__dirname + '/expoResults.html'));
 
-
 app.set('view engine', 'html');
 app.set('views', __dirname + '/');
 

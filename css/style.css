@@ -437,6 +437,7 @@ picture .image.visible {
   font-size: 24px;
   width: 75px;
   letter-spacing: 4px;
+  outline: none !important;
 }
 
 .Rules .Button, .Rules .Home-button {
