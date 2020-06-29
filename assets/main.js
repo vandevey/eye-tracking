@@ -1,5 +1,6 @@
 var points = [];
 var captureTrue = false;
+var doOnce = true;
 
 var images = [
   "//images.unsplash.com/photo-1592727995117-4cdc7ee6fcb4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
@@ -73,21 +74,21 @@ function setupCollisionSystem() {
     .style("position", "absolute")
     .style("z-index", 110);
 
-  svg.append("line")
-    .attr("id", "eyeline1")
-    .attr("stroke-width", 2)
-    .attr("stroke", "green");
+  // svg.append("line")
+  //   .attr("id", "eyeline1")
+  //   .attr("stroke-width", 2)
+  //   .attr("stroke", "green");
 
-  svg.append("line")
-    .attr("id", "eyeline2")
-    .attr("stroke-width", 2)
-    .attr("stroke", "green");
+  // svg.append("line")
+  //   .attr("id", "eyeline2")
+  //   .attr("stroke-width", 2)
+  //   .attr("stroke", "green");
 
-  svg.append("rect")
-    .attr("id", "averageCircle")
-    .attr("width", 10)
-    .attr("height", 10)
-    .attr("fill", "green");
+  // svg.append("rect")
+  //   .attr("id", "averageCircle")
+  //   .attr("width", 10)
+  //   .attr("height", 10)
+  //   .attr("fill", "green");
 }
 
 var collisionEyeListener = function (data, clock) {
@@ -136,21 +137,21 @@ var collisionEyeListener = function (data, clock) {
     points.push(point);
   }
 
-  var dot2 = d3.select("#averageCircle")
-    .attr("x", averagePoint.x)
-    .attr("y", averagePoint.y)
+  // var dot2 = d3.select("#averageCircle")
+  //   .attr("x", averagePoint.x)
+  //   .attr("y", averagePoint.y)
 
-  var line = d3.select('#eyeline1')
-    .attr("x1", averagePoint.x)
-    .attr("y1", averagePoint.y)
-    .attr("x2", cl.getCurrentPosition()[27][0] * whr[0])
-    .attr("y2", cl.getCurrentPosition()[27][1] * whr[1]);
+  // var line = d3.select('#eyeline1')
+  //   .attr("x1", averagePoint.x)
+  //   .attr("y1", averagePoint.y)
+  //   .attr("x2", cl.getCurrentPosition()[27][0] * whr[0])
+  //   .attr("y2", cl.getCurrentPosition()[27][1] * whr[1]);
 
-  var line = d3.select("#eyeline2")
-    .attr("x1", averagePoint.x)
-    .attr("y1", averagePoint.y)
-    .attr("x2", cl.getCurrentPosition()[32][0] * whr[0])
-    .attr("y2", cl.getCurrentPosition()[32][1] * whr[1]);
+  // var line = d3.select("#eyeline2")
+  //   .attr("x1", averagePoint.x)
+  //   .attr("y1", averagePoint.y)
+  //   .attr("x2", cl.getCurrentPosition()[32][0] * whr[0])
+  //   .attr("y2", cl.getCurrentPosition()[32][1] * whr[1]);
 
   nodes[0].px = averagePoint.x;
   nodes[0].py = averagePoint.y;
@@ -163,9 +164,14 @@ let clickCount = 0;
 calibrationDots.on('click', function () {
   clickCount++;
   $(this).css('opacity', '0')
-  if (clickCount == 9) {
+  if ((clickCount == 9) && doOnce) {
     let index = 0;
+    $('#webgazerVideoFeed').css('opacity', '0');
+    $('#webgazerFaceOverlay').css('opacity', '0');
+    $('#webgazerFaceFeedbackBox').css('opacity', '0');
+    doOnce = false;
     screen(index);
+    
   }
 })
 
@@ -204,7 +210,7 @@ function screen(index) {
       $('.TransitionPanel').addClass('visible');
       index++;
       screen(index) //again
-    }, 11000);
+    }, 9000);
   } else {
     console.log('redirect');
     document.location.href = "http://localhost:1337/results";
