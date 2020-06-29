@@ -29,7 +29,6 @@ html {
     text-decoration: none;
 }
 
-
 // #webgazerFaceOverlay,
 // #webgazerFaceFeedbackBox {
 //     z-index: 140;
@@ -54,8 +53,6 @@ html {
 #webgazerFaceOverlay,
 #webgazerFaceFeedbackBox {
     z-index: 159 !important;
-
-   
 }
 
 .ProgressBar {
@@ -113,6 +110,12 @@ picture {
     transform: translate(-50%, -50%);
 }
 
+// @keyframes slideDown {
+//     0%   { transform: translateY(-100%);}
+//     50%  {transform: translateY(0);}
+//     100% { transform: translateY(-100%);}
+//   }
+
 .TransitionPanel {
     position: absolute;
     top: 0;
@@ -127,6 +130,10 @@ picture {
     &.visible {
         transform: translateY(0);
         transition: transform 1s ease;
+
+        // animation-name: slideDown;
+        // animation-duration: 2s;
+        // animation-timing-function: ease;
     }
 }
 
@@ -152,7 +159,7 @@ picture {
         display: block;
         text-align: center;
         transform: translate(-50%, -150px);
-        transition: .5s ease;
+        transition: 0.5s ease;
         font-size: 34px;
         font-weight: 600;
     }
@@ -269,12 +276,11 @@ picture {
         display: flex;
         margin: 20px 0 30px;
     }
-   
+
     &-button {
         @extend .Button;
     }
 }
-
 
 .Results {
     display: flex;
@@ -304,7 +310,8 @@ picture {
         margin: 0 0 30px;
     }
 
-    p, li {
+    p,
+    li {
         font-size: 20px;
         line-height: 26px;
     }
@@ -331,7 +338,6 @@ picture {
         transform: translate(-50%, -50%);
         width: 500px;
         text-align: center;
-
     }
 }
 

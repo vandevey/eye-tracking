@@ -165,8 +165,8 @@ picture .image.visible {
   text-align: center;
   -webkit-transform: translate(-50%, -150px);
           transform: translate(-50%, -150px);
-  -webkit-transition: .5s ease;
-  transition: .5s ease;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
   font-size: 34px;
   font-weight: 600;
 }
@@ -344,7 +344,8 @@ picture .image.visible {
   margin: 0 0 30px;
 }
 
-.Results p, .Results li {
+.Results p,
+.Results li {
   font-size: 20px;
   line-height: 26px;
 }
